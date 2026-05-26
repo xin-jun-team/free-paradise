@@ -13,7 +13,7 @@ function _loadEvents(callback) {
   fetch('_data/events.json?v=' + Date.now())
     .then(function(r){ return r.json(); })
     .then(function(data){
-      EVENTS = (data || []).map(function(ev){
+      EVENTS = ((data && data.list) ? data.list : (Array.isArray(data) ? data : [])).map(function(ev){
         return {
           url:   ev.link  || ev.url  || '',
           tag:   ev.tag   || '活動',

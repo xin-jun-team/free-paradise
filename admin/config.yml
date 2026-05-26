@@ -17,7 +17,7 @@ collections:
         file: "_data/events.json"
         fields:
           - label: "活動列表"
-            name: "root"
+            name: "list"
             widget: "list"
             fields:
               - { label: "活動標題", name: "title", widget: "string" }
