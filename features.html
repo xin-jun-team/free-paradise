@@ -7,8 +7,40 @@
   <link rel="stylesheet" href="style.css?v=5">
   <style>
     body { background-image:url('https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDxWoVMXV9s1y1wnne5ywMsTs_ydDeAALhDmsbhZOoVNGs1nQuD8M-AQADAgADeQADOwQ.jpg');background-size:cover;background-position:center center;background-attachment:fixed; }
-    .section     { background:rgba(6,9,16,0.82)  !important; }
-    .section-alt { background:rgba(15,12,12,0.88) !important; }
+
+    /* ── 特色列表 ── */
+    .feat-list { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+    @media(max-width:640px){ .feat-list{ grid-template-columns:1fr; } }
+
+    .feat-item {
+      display:flex; align-items:flex-start; gap:18px;
+      background:var(--bg2); border:1px solid var(--border);
+      border-radius:12px; padding:22px 20px;
+      text-decoration:none; color:inherit;
+      transition:border-color .25s, box-shadow .25s, transform .2s;
+      position:relative; overflow:hidden;
+    }
+    .feat-item::before {
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(135deg,rgba(201,160,64,.06),transparent);
+      opacity:0; transition:opacity .25s;
+    }
+    .feat-item:hover { border-color:var(--pink); box-shadow:0 0 22px rgba(201,160,64,.25); transform:translateY(-3px); }
+    .feat-item:hover::before { opacity:1; }
+
+    .feat-icon {
+      width:56px; height:56px; flex-shrink:0;
+      background:linear-gradient(135deg,var(--bg3),var(--bg));
+      border:1px solid var(--border); border-radius:14px;
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.7rem; box-shadow:0 2px 10px rgba(0,0,0,.4);
+    }
+    .feat-body { flex:1; min-width:0; }
+    .feat-num  { font-size:.72em; color:var(--text-dim); letter-spacing:.1em; margin-bottom:4px; }
+    .feat-name { font-size:1.05em; font-weight:700; color:var(--pink); margin-bottom:6px; line-height:1.3; }
+    .feat-desc { font-size:.83em; color:var(--text-muted); line-height:1.55; }
+    .feat-more { display:inline-block; margin-top:10px; font-size:.8em; color:var(--pink); opacity:.8; }
+    .feat-item:hover .feat-more { opacity:1; }
   </style>
 </head>
 <body>
@@ -47,111 +79,105 @@
     <div class="section-line"></div>
   </div>
 
-  <div class="feature-card-grid">
+  <div class="feat-list">
 
-    <a href="feature-01.html" class="feature-card">
-      <div class="feature-card-img">
-        <img loading="lazy" src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDuGoQI9gVuwacNDCi_K26yyOJKL8uAAK_Dmsb09WJVP1HUYzf6CALAQADAgADeQADOwQ.jpg" alt="法師召喚物系統">
-      </div>
-      <div class="feature-card-body">
-        <div class="feature-card-num">01</div>
-        <div class="feature-card-title">法師召喚物系統</div>
-        <div class="feature-card-arrow">了解更多 →</div>
+    <a href="feature-01.html" class="feat-item">
+      <div class="feat-icon">🔮</div>
+      <div class="feat-body">
+        <div class="feat-num">NO.01</div>
+        <div class="feat-name">法師召喚物系統</div>
+        <div class="feat-desc">法師可召喚強力輔助生物，提升戰場控制力與爆發傷害，打出屬於你的戰術節奏。</div>
+        <span class="feat-more">了解更多 →</span>
       </div>
     </a>
 
-    <a href="feature-02.html" class="feature-card">
-      <div class="feature-card-img">
-        <img loading="lazy" src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDuWoQJAMgIbMGzFMNSqdpHTY1MngoAALADmsb09WJVBD5_gv4v2QTAQADAgADeQADOwQ.jpg" alt="職業特色技能">
-      </div>
-      <div class="feature-card-body">
-        <div class="feature-card-num">02</div>
-        <div class="feature-card-title">職業特色技能</div>
-        <div class="feature-card-arrow">了解更多 →</div>
-      </div>
-    </a>
-
-    <a href="feature-03.html" class="feature-card">
-      <div class="feature-card-img">
-        <img loading="lazy" src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDumoQJB3KLntZ3_ycTpDBjjRt0Eb-AALBDmsb09WJVKzW7SyOIVfSAQADAgADeQADOwQ.jpg" alt="職業之力介紹">
-      </div>
-      <div class="feature-card-body">
-        <div class="feature-card-num">03</div>
-        <div class="feature-card-title">職業之力介紹</div>
-        <div class="feature-card-arrow">了解更多 →</div>
+    <a href="feature-02.html" class="feat-item">
+      <div class="feat-icon">⚔️</div>
+      <div class="feat-body">
+        <div class="feat-num">NO.02</div>
+        <div class="feat-name">職業特色技能</div>
+        <div class="feat-desc">各職業擁有獨特主動技能，搭配裝備強化後形成差異化打法，策略深度全面提升。</div>
+        <span class="feat-more">了解更多 →</span>
       </div>
     </a>
 
-    <a href="feature-05.html" class="feature-card">
-      <div class="feature-card-img">
-        <img loading="lazy" src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDu2oQJC_Vsl83Yj03IR-5mz4GRw0UAALCDmsb09WJVEz8TtvW0-f6AQADAgADeQADOwQ.jpg" alt="寵物系統介紹">
-      </div>
-      <div class="feature-card-body">
-        <div class="feature-card-num">04</div>
-        <div class="feature-card-title">寵物系統介紹</div>
-        <div class="feature-card-arrow">了解更多 →</div>
-      </div>
-    </a>
-
-    <a href="feature-07.html" class="feature-card">
-      <div class="feature-card-img">
-        <img loading="lazy" src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDvGoQJEtn9xYZaaYXrCMb7Bma2KgNAALDDmsb09WJVKODv7cIKJJ-AQADAgADeQADOwQ.jpg" alt="威望系統">
-      </div>
-      <div class="feature-card-body">
-        <div class="feature-card-num">05</div>
-        <div class="feature-card-title">威望系統</div>
-        <div class="feature-card-arrow">了解更多 →</div>
+    <a href="feature-03.html" class="feat-item">
+      <div class="feat-icon">💪</div>
+      <div class="feat-body">
+        <div class="feat-num">NO.03</div>
+        <div class="feat-name">職業之力介紹</div>
+        <div class="feat-desc">每個職業擁有專屬被動加成，深度挖掘你的角色潛力，在戰場上展現絕對優勢。</div>
+        <span class="feat-more">了解更多 →</span>
       </div>
     </a>
 
-    <a href="feature-08.html" class="feature-card">
-      <div class="feature-card-img">
-        <img loading="lazy" src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDvWoQJHFBXEn_qtcl7uiRca2r4uIhAALEDmsb09WJVGaZ2e67Zb8wAQADAgADeQADOwQ.jpg" alt="高寵介紹">
-      </div>
-      <div class="feature-card-body">
-        <div class="feature-card-num">06</div>
-        <div class="feature-card-title">高寵介紹</div>
-        <div class="feature-card-arrow">了解更多 →</div>
-      </div>
-    </a>
-
-    <a href="feature-09.html" class="feature-card">
-      <div class="feature-card-img">
-        <img loading="lazy" src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDvmoQJIG4CVFYEwi113-wfgbVYENVAALGDmsb09WJVDN0Y04OiK92AQADAgADeQADOwQ.jpg" alt="在線禮包">
-      </div>
-      <div class="feature-card-body">
-        <div class="feature-card-num">07</div>
-        <div class="feature-card-title">在線禮包</div>
-        <div class="feature-card-arrow">了解更多 →</div>
+    <a href="feature-05.html" class="feat-item">
+      <div class="feat-icon">🐾</div>
+      <div class="feat-body">
+        <div class="feat-num">NO.04</div>
+        <div class="feat-name">寵物系統介紹</div>
+        <div class="feat-desc">多元寵物各具特色屬性，可培養、進化，成為你冒險旅程中最得力的夥伴。</div>
+        <span class="feat-more">了解更多 →</span>
       </div>
     </a>
 
-    <a href="feature-12.html" class="feature-card">
-      <div class="feature-card-img">
-        <img loading="lazy" src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDv2oQJJjTzdRSqT8r7hUmpSBixLLmAALIDmsb09WJVCGn0PPOe_rsAQADAgADeQADOwQ.jpg" alt="換金道具">
-      </div>
-      <div class="feature-card-body">
-        <div class="feature-card-num">08</div>
-        <div class="feature-card-title">換金道具</div>
-        <div class="feature-card-arrow">了解更多 →</div>
-      </div>
-    </a>
-
-    <a href="anti-cheat.html" class="feature-card">
-      <div class="feature-card-img"><img loading="lazy" src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDwGoQJKkjphnH7GPTn__BY0LMfUjyAALJDmsb09WJVO-Gm0r5pkNBAQADAgADeQADOwQ.jpg" alt="防外掛驗證"></div>
-      <div class="feature-card-body">
-        <div class="feature-card-num">09</div>
-        <div class="feature-card-title">防外掛驗證</div>
-        <div class="feature-card-arrow">了解更多 →</div>
+    <a href="feature-07.html" class="feat-item">
+      <div class="feat-icon">👑</div>
+      <div class="feat-body">
+        <div class="feat-num">NO.05</div>
+        <div class="feat-name">威望系統</div>
+        <div class="feat-desc">透過累積威望值解鎖專屬稱號與特權，在伺服器中彰顯你的地位與成就。</div>
+        <span class="feat-more">了解更多 →</span>
       </div>
     </a>
 
-    <a href="maps.html" class="feature-card">
-      <div class="feature-card-img"><img loading="lazy" src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDwWoQJTh8iHx5_HpWU3fbowoTqqwBAALLDmsb09WJVCDx16j-f6_vAQADAgADeQADOwQ.jpg" alt="地圖介紹"></div>
-      <div class="feature-card-body">
-        <div class="feature-card-num">10</div>
-        <div class="feature-card-title">地圖介紹</div>
-        <div class="feature-card-arrow">了解更多 →</div>
+    <a href="feature-08.html" class="feat-item">
+      <div class="feat-icon">🦁</div>
+      <div class="feat-body">
+        <div class="feat-num">NO.06</div>
+        <div class="feat-name">高寵介紹</div>
+        <div class="feat-desc">稀有高階寵物擁有超強戰力加成，是頂尖玩家競相追求的夢幻收藏目標。</div>
+        <span class="feat-more">了解更多 →</span>
+      </div>
+    </a>
+
+    <a href="feature-09.html" class="feat-item">
+      <div class="feat-icon">🎁</div>
+      <div class="feat-body">
+        <div class="feat-num">NO.07</div>
+        <div class="feat-name">在線禮包</div>
+        <div class="feat-desc">只要保持在線，系統定時派送豐富道具禮包，讓你的每一分鐘都充滿回饋。</div>
+        <span class="feat-more">了解更多 →</span>
+      </div>
+    </a>
+
+    <a href="feature-12.html" class="feat-item">
+      <div class="feat-icon">💰</div>
+      <div class="feat-body">
+        <div class="feat-num">NO.08</div>
+        <div class="feat-name">換金道具</div>
+        <div class="feat-desc">特定道具可直接換取遊戲金幣，讓努力刷怪的成果轉化為實實在在的財富。</div>
+        <span class="feat-more">了解更多 →</span>
+      </div>
+    </a>
+
+    <a href="anti-cheat.html" class="feat-item">
+      <div class="feat-icon">🛡️</div>
+      <div class="feat-body">
+        <div class="feat-num">NO.09</div>
+        <div class="feat-name">防外掛驗證</div>
+        <div class="feat-desc">全面反外掛機制保障公平環境，讓每位手動玩家的努力得到真正的尊重與回報。</div>
+        <span class="feat-more">了解更多 →</span>
+      </div>
+    </a>
+
+    <a href="maps.html" class="feat-item">
+      <div class="feat-icon">🗺️</div>
+      <div class="feat-body">
+        <div class="feat-num">NO.10</div>
+        <div class="feat-name">地圖介紹</div>
+        <div class="feat-desc">各地圖擁有獨特特殊掉落與挑戰，探索每一片土地，收穫稀有裝備與珍貴材料。</div>
+        <span class="feat-more">了解更多 →</span>
       </div>
     </a>
 
