@@ -1,0 +1,29 @@
+[
+  {
+    "title": "開局紅變＋紅娃活動",
+    "subtitle": "開服限定活動，快來搶先體驗！",
+    "tag": "限時",
+    "link": "events.html",
+    "date": "2026-05-26",
+    "pin": true,
+    "img": ""
+  },
+  {
+    "title": "預約LINE禮包",
+    "subtitle": "免費領取新手大禮，加入官方即可申請",
+    "tag": "長期",
+    "link": "event-line.html",
+    "date": "2026-05-26",
+    "pin": false,
+    "img": ""
+  },
+  {
+    "title": "58衝拿英雄神武再送發財金",
+    "subtitle": "送藍武・英雄神武・3000藍鑽",
+    "tag": "公平服",
+    "link": "event-58hero.html",
+    "date": "2026-05-26",
+    "pin": true,
+    "img": ""
+  }
+]

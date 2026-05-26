@@ -21,16 +21,24 @@
     <!-- 基礎倍率與版本 -->
     <div style="background:var(--bg2);border:1px solid rgba(0,229,255,.2);border-radius:12px;padding:24px;margin-bottom:24px">
       <h3 style="color:var(--accent);margin:0 0 16px 0;font-size:1em;letter-spacing:1px;border-left:3px solid var(--accent);padding-left:10px">💎 基礎倍率與版本</h3>
-      <ul style="list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px">
-        <li style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:.9em">🔹 遊戲版本：<strong style="color:#ff9800">3.81 手動（天M版）</strong></li>
-        <li style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:.9em">🔹 手動經驗：<strong style="color:#00ff7f">× 30</strong></li>
-        <li style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:.9em">🔹 金幣倍率：<strong style="color:#00ff7f">10 倍</strong></li>
-        <li style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:.9em">🔹 掉落倍率：<strong style="color:#00ff7f">× 5</strong></li>
-        <li style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:.9em">🔹 武防強化：<strong style="color:#00ff7f">2 倍</strong></li>
-        <li style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:.9em">🔹 正義倍率：<strong style="color:#00ff7f">3 倍</strong></li>
-        <li style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:.9em">🔹 負重倍率：<strong style="color:#00ff7f">4 倍</strong></li>
-        <li style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:.9em">🔹 寵物倍率：<strong style="color:#00ff7f">× 15</strong></li>
+      <ul id="ratesList" style="list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px">
+        <li style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:.9em">🔹 遊戲版本：<strong style="color:#ff9800" id="r-version">3.81 手動（天M版）</strong></li>
+        <li style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:.9em">🔹 手動經驗：<strong style="color:#00ff7f">× <span id="r-manual_exp">30</span></strong></li>
+        <li style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:.9em">🔹 金幣倍率：<strong style="color:#00ff7f"><span id="r-gold">10</span> 倍</strong></li>
+        <li style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:.9em">🔹 掉落倍率：<strong style="color:#00ff7f">× <span id="r-drop">5</span></strong></li>
+        <li style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:.9em">🔹 武防強化：<strong style="color:#00ff7f"><span id="r-enhance">2</span> 倍</strong></li>
+        <li style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:.9em">🔹 正義倍率：<strong style="color:#00ff7f"><span id="r-justice">3</span> 倍</strong></li>
+        <li style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:.9em">🔹 負重倍率：<strong style="color:#00ff7f"><span id="r-weight">4</span> 倍</strong></li>
+        <li style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:.9em">🔹 寵物倍率：<strong style="color:#00ff7f">× <span id="r-pet">15</span></strong></li>
       </ul>
+      <script>
+        fetch('_data/rates.json').then(function(r){return r.json();}).then(function(d){
+          ['version','manual_exp','gold','drop','enhance','justice','weight','pet'].forEach(function(k){
+            var el = document.getElementById('r-'+k);
+            if(el && d[k] !== undefined) el.textContent = d[k];
+          });
+        }).catch(function(){});
+      </script>
     </div>
 
     <!-- 角色素質與等級限制 -->

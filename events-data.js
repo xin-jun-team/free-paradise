@@ -1,138 +1,110 @@
 /**
  * 活動公告資料設定檔
  * ─────────────────────────────────────────
- * 新增活動只需在下方陣列加一筆物件，存檔後網頁自動顯示，不需修改任何 HTML。
- *
- * 欄位說明：
- *   url   : 活動頁面路徑（相對路徑）
- *   tag   : 標籤文字（活動 / 禮包 / 慶典 / 系統 / 新開 … 自由填寫）
- *   title : 活動標題
- *   desc  : 一行簡介
- *   date  : 日期字串，用於排序（格式 YYYY-MM-DD）
- *   pin   : true = 置頂（可省略，預設 false）
+ * 活動資料由後台管理系統自動寫入 _data/events.json
+ * 直接修改此檔案或透過後台 /admin 介面管理皆可
  */
-var EVENTS = [
-  {
-    url:   'events.html',
-    tag:   '活動',
-    title: '開局紅變＋紅娃活動',
-    desc:  '登入就送英雄變身＋娃娃，開局加碼稀有＋7武器，自帶魔武！！練功必備',
-    date:  '2026-05-15',
-    pin:   true,
-  },
-  {
-    url:   'event-line.html',
-    tag:   '禮包',
-    title: '預約 LINE 禮包',
-    desc:  '加入官方 LINE 社群預約，開服即可領取專屬新手好禮',
-    date:  '2026-05-12',
-  },
-  {
-    url:   'event-58hero.html',
-    tag:   '活動',
-    title: '58衝拿英雄神武再送發財金',
-    desc:  '衝到58等送英雄神武＋3000藍鑽發財金，打寶才會爽！',
-    date:  '2026-05-26',
-    pin:   true,
-  },
-  // ── 在此往下新增活動 ──────────────────
-  // {
-  //   url:   'event-xxx.html',
-  //   tag:   '活動',
-  //   title: '活動名稱',
-  //   desc:  '簡短說明',
-  //   date:  '2026-06-01',
-  // },
-];
 
-// 自動渲染上一則/下一則導覽到 #eventNav（若頁面存在）
+var EVENTS = [];
+
+// 從 _data/events.json 載入（後台儲存的資料）
+// 本地開啟時 fetch 會失敗，自動使用備用資料
+function _loadEvents(callback) {
+  fetch('_data/events.json?v=' + Date.now())
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      EVENTS = (data || []).map(function(ev){
+        return {
+          url:   ev.link  || ev.url  || '',
+          tag:   ev.tag   || '活動',
+          title: ev.title || '',
+          desc:  ev.subtitle || ev.desc || '',
+          date:  ev.date  || '',
+          pin:   !!ev.pin,
+        };
+      });
+      callback();
+    })
+    .catch(function(){
+      // fetch 失敗時使用備用資料（本地預覽用）
+      EVENTS = [
+        { url:'events.html',      tag:'活動', title:'開局紅變＋紅娃活動',           desc:'登入就送英雄變身＋娃娃，開局加碼稀有＋7武器，自帶魔武！！練功必備', date:'2026-05-15', pin:true },
+        { url:'event-line.html',  tag:'禮包', title:'預約 LINE 禮包',                desc:'加入官方 LINE 社群預約，開服即可領取專屬新手好禮',                   date:'2026-05-12' },
+        { url:'event-58hero.html',tag:'活動', title:'58衝拿英雄神武再送發財金',      desc:'衝到58等送英雄神武＋3000藍鑽發財金，打寶才會爽！',                   date:'2026-05-26', pin:true },
+      ];
+      callback();
+    });
+}
+
+function _sortEvents(arr) {
+  return arr.slice().sort(function(a,b){
+    if(a.pin && !b.pin) return -1;
+    if(!a.pin && b.pin) return 1;
+    return (b.date||'').localeCompare(a.date||'');
+  });
+}
+
 function renderEventNav(){
   var nav = document.getElementById('eventNav');
   if(!nav) return;
-
-  // 依置頂→日期降序排序，與活動一覽相同
-  var sorted = EVENTS.slice().sort(function(a,b){
-    if(a.pin && !b.pin) return -1;
-    if(!a.pin && b.pin) return 1;
-    return (b.date||'').localeCompare(a.date||'');
-  });
-
-  // 比對目前頁面檔名
+  var sorted = _sortEvents(EVENTS);
   var current = location.pathname.split('/').pop() || 'index.html';
   var idx = sorted.findIndex(function(ev){ return ev.url === current; });
   if(idx === -1) return;
-
-  var prev = idx > 0 ? sorted[idx - 1] : null;
-  var next = idx < sorted.length - 1 ? sorted[idx + 1] : null;
-
+  var prev = idx > 0 ? sorted[idx-1] : null;
+  var next = idx < sorted.length-1 ? sorted[idx+1] : null;
   nav.innerHTML = '<div class="feature-nav-btns">'
-    + (prev ? '<a href="' + prev.url + '" class="btn-outline">← ' + prev.title + '</a>' : '<span></span>')
-    + (next ? '<a href="' + next.url + '" class="btn-outline">' + next.title + ' →</a>' : '<span></span>')
+    + (prev ? '<a href="'+prev.url+'" class="btn-outline">← '+prev.title+'</a>' : '<span></span>')
+    + (next ? '<a href="'+next.url+'" class="btn-outline">'+next.title+' →</a>' : '<span></span>')
     + '</div>';
 }
 
-// 自動渲染到 #eventList（若頁面存在）
 function renderEventList(){
   var list = document.getElementById('eventList');
   if(!list) return;
-
-  var sorted = EVENTS.slice().sort(function(a,b){
-    if(a.pin && !b.pin) return -1;
-    if(!a.pin && b.pin) return 1;
-    return (b.date||'').localeCompare(a.date||'');
-  });
-
-  if(sorted.length === 0){
+  var sorted = _sortEvents(EVENTS);
+  if(!sorted.length){
     list.innerHTML = '<p style="text-align:center;color:var(--text-muted);padding:40px 0">目前沒有進行中的活動</p>';
     return;
   }
-
   list.innerHTML = sorted.map(function(ev){
-    var tagClass = 'tag-' + (ev.tag || '其他');
-    return '<a href="' + ev.url + '" class="event-item">'
-      + '<span class="event-tag ' + tagClass + '">' + (ev.tag||'其他') + '</span>'
-      + '<div class="event-info">'
-      + '<div class="event-title">' + ev.title + '</div>'
-      + '<div class="event-desc">' + (ev.desc||'') + '</div>'
-      + '</div>'
-      + '<span class="event-arrow">→</span>'
-      + '</a>';
+    return '<a href="'+ev.url+'" class="event-item">'
+      +'<span class="event-tag tag-'+(ev.tag||'其他')+'">'+(ev.tag||'其他')+'</span>'
+      +'<div class="event-info">'
+      +'<div class="event-title">'+ev.title+'</div>'
+      +'<div class="event-desc">'+(ev.desc||'')+'</div>'
+      +'</div>'
+      +'<span class="event-arrow">→</span>'
+      +'</a>';
   }).join('');
 }
-// 自動渲染最新公告到首頁 #annGrid（若頁面存在）
+
 function renderAnnouncements(){
   var grid = document.getElementById('annGrid');
   if(!grid) return;
-
-  // 置頂優先 → 日期降序，最多顯示 4 筆
-  var sorted = EVENTS.slice().sort(function(a,b){
-    if(a.pin && !b.pin) return -1;
-    if(!a.pin && b.pin) return 1;
-    return (b.date||'').localeCompare(a.date||'');
-  }).slice(0, 4);
-
-  if(sorted.length === 0){
+  var sorted = _sortEvents(EVENTS).slice(0,4);
+  if(!sorted.length){
     grid.innerHTML = '<p style="text-align:center;color:var(--text-muted);padding:40px 0">目前沒有公告</p>';
     return;
   }
-
   grid.innerHTML = sorted.map(function(ev){
-    var tagClass = 'tag-' + (ev.tag || '活動');
     var pinMark = ev.pin ? '<span style="color:#f2d06b;margin-right:4px;font-size:.75em">📌</span>' : '';
-    return '<a class="ann-card" href="' + ev.url + '">'
-      + '<div class="ann-card-meta">'
-      + '<span class="ann-tag ' + tagClass + '">' + (ev.tag || '活動') + '</span>'
-      + '<span class="ann-date">' + (ev.date || '') + '</span>'
-      + '</div>'
-      + '<div class="ann-card-title">' + pinMark + ev.title + '</div>'
-      + '<div class="ann-card-excerpt">' + (ev.desc || '') + '</div>'
-      + '<div class="ann-card-more">閱讀更多 →</div>'
-      + '</a>';
+    return '<a class="ann-card" href="'+ev.url+'">'
+      +'<div class="ann-card-meta">'
+      +'<span class="ann-tag tag-'+(ev.tag||'活動')+'">'+(ev.tag||'活動')+'</span>'
+      +'<span class="ann-date">'+(ev.date||'')+'</span>'
+      +'</div>'
+      +'<div class="ann-card-title">'+pinMark+ev.title+'</div>'
+      +'<div class="ann-card-excerpt">'+(ev.desc||'')+'</div>'
+      +'<div class="ann-card-more">閱讀更多 →</div>'
+      +'</a>';
   }).join('');
 }
 
 document.addEventListener('DOMContentLoaded', function(){
-  renderEventList();
-  renderEventNav();
-  renderAnnouncements();
+  _loadEvents(function(){
+    renderEventList();
+    renderEventNav();
+    renderAnnouncements();
+  });
 });
