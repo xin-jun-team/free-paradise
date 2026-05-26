@@ -28,11 +28,12 @@ var EVENTS = [
     date:  '2026-05-12',
   },
   {
-    url:   'event-bonfire.html',
-    tag:   '慶典',
-    title: '烽火慶典禮包',
-    desc:  '烽火慶典限定好禮，豐厚獎勵等你來領',
-    date:  '2026-05-12',
+    url:   'event-58hero.html',
+    tag:   '活動',
+    title: '58衝拿英雄神武再送發財金',
+    desc:  '衝到58等送英雄神武＋3000藍鑽發財金，打寶才會爽！',
+    date:  '2026-05-26',
+    pin:   true,
   },
   // ── 在此往下新增活動 ──────────────────
   // {
@@ -98,7 +99,40 @@ function renderEventList(){
       + '</a>';
   }).join('');
 }
+// 自動渲染最新公告到首頁 #annGrid（若頁面存在）
+function renderAnnouncements(){
+  var grid = document.getElementById('annGrid');
+  if(!grid) return;
+
+  // 置頂優先 → 日期降序，最多顯示 4 筆
+  var sorted = EVENTS.slice().sort(function(a,b){
+    if(a.pin && !b.pin) return -1;
+    if(!a.pin && b.pin) return 1;
+    return (b.date||'').localeCompare(a.date||'');
+  }).slice(0, 4);
+
+  if(sorted.length === 0){
+    grid.innerHTML = '<p style="text-align:center;color:var(--text-muted);padding:40px 0">目前沒有公告</p>';
+    return;
+  }
+
+  grid.innerHTML = sorted.map(function(ev){
+    var tagClass = 'tag-' + (ev.tag || '活動');
+    var pinMark = ev.pin ? '<span style="color:#f2d06b;margin-right:4px;font-size:.75em">📌</span>' : '';
+    return '<a class="ann-card" href="' + ev.url + '">'
+      + '<div class="ann-card-meta">'
+      + '<span class="ann-tag ' + tagClass + '">' + (ev.tag || '活動') + '</span>'
+      + '<span class="ann-date">' + (ev.date || '') + '</span>'
+      + '</div>'
+      + '<div class="ann-card-title">' + pinMark + ev.title + '</div>'
+      + '<div class="ann-card-excerpt">' + (ev.desc || '') + '</div>'
+      + '<div class="ann-card-more">閱讀更多 →</div>'
+      + '</a>';
+  }).join('');
+}
+
 document.addEventListener('DOMContentLoaded', function(){
   renderEventList();
   renderEventNav();
+  renderAnnouncements();
 });
