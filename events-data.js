@@ -28,6 +28,7 @@ function _loadEvents(callback) {
     .catch(function(){
       // fetch 失敗時使用備用資料（本地預覽用）
       EVENTS = [
+        { url:'event-dragon-boat.html', tag:'活動', title:'🐙消滅海怪🐙 拯救屈原', desc:'端午節活動・消滅海怪・討伐屈原的魂魄・活動時間 06/01~06/30', date:'2026-06-01', pin:true },
         { url:'events.html',      tag:'活動', title:'開局紅變＋紅娃活動',           desc:'登入就送英雄變身＋娃娃，開局加碼稀有＋7武器，自帶魔武！！練功必備', date:'2026-05-15', pin:true },
         { url:'event-line.html',  tag:'禮包', title:'預約 LINE 禮包',                desc:'加入官方 LINE 社群預約，開服即可領取專屬新手好禮',                   date:'2026-05-12' },
         { url:'event-58hero.html',tag:'活動', title:'58衝拿英雄神武再送發財金',      desc:'衝到58等送英雄神武＋3000藍鑽發財金，打寶才會爽！',                   date:'2026-05-26', pin:true },
