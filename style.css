@@ -5,22 +5,24 @@
 
 /* ══ 變數 ══ */
 :root {
-  --pink:        #c9a040;
-  --pink-light:  #f2d06b;
-  --pink-dark:   #9a7520;
-  --cyan:        #e02020;
-  --cyan-dark:   #a01010;
-  --yellow:      #ffe600;
-  --bg:          #060910;
-  --bg2:         #0a0d1e;
-  --bg3:         #0f1228;
-  --bg4:         #171c38;
-  --border:      rgba(201,160,64,0.22);
-  --border-hi:   rgba(201,160,64,0.6);
-  --text:        #e8e6d0;
-  --text-dim:    #b0a880;
-  --text-muted:  #7a7050;
-  --white:       #e8e6d0;
+  --pink:        #00c896;
+  --pink-light:  #4dffd0;
+  --pink-dark:   #008f6a;
+  --cyan:        #00e5c0;
+  --cyan-dark:   #009e88;
+  --yellow:      #a8ffda;
+  --bg:          #060c0a;
+  --bg2:         #0a1410;
+  --bg3:         #0e1e18;
+  --bg4:         #152820;
+  --border:      rgba(0,200,150,0.22);
+  --border-hi:   rgba(0,200,150,0.6);
+  --text:        #d4f0e8;
+  --text-dim:    #80c0a8;
+  --text-muted:  #4a8a70;
+  --white:       #d4f0e8;
+  --gold:        #00c896;
+  --accent:      #00c896;
 }
 
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -28,8 +30,8 @@ html { scroll-behavior:smooth; font-size:16px; }
 body {
   background: var(--bg);
   background-image:
-    linear-gradient(rgba(201,160,64,.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(201,160,64,.035) 1px, transparent 1px);
+    linear-gradient(rgba(0,200,150,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,200,150,.04) 1px, transparent 1px);
   background-size: 44px 44px;
   color: var(--text);
   font-family: 'Noto Sans TC', sans-serif;
@@ -44,13 +46,31 @@ img { max-width:100%; display:block; }
 ::-webkit-scrollbar-track { background:var(--bg2); }
 ::-webkit-scrollbar-thumb { background:var(--pink-dark); border-radius:3px; }
 
+/* ══ 頂部跑馬燈 ══ */
+.ticker-bar {
+  position:fixed; top:0; left:0; right:0; z-index:1000;
+  background:linear-gradient(90deg,#004d38,#006b50,#004d38);
+  border-bottom:1px solid rgba(0,200,150,.4);
+  height:28px; overflow:hidden; display:flex; align-items:center;
+}
+.ticker-inner {
+  display:flex; gap:80px; white-space:nowrap;
+  animation: ticker-scroll 28s linear infinite;
+  font-size:.75rem; color:#4dffd0; letter-spacing:1px; font-weight:500;
+}
+@keyframes ticker-scroll {
+  0%   { transform:translateX(0); }
+  100% { transform:translateX(-50%); }
+}
+.ticker-item::before { content:'✦ '; color:#00c896; }
+
 /* ══ 導覽列 ══ */
 .topnav {
-  position:fixed; top:0; left:0; right:0; z-index:900;
-  background: rgba(6,9,16,0.96);
+  position:fixed; top:28px; left:0; right:0; z-index:900;
+  background: rgba(6,12,10,0.96);
   backdrop-filter: blur(10px);
   border-bottom: 2px solid var(--pink);
-  box-shadow: 0 2px 24px rgba(201,160,64,0.25);
+  box-shadow: 0 2px 24px rgba(0,200,150,0.25);
   display:flex; align-items:center;
   height:56px; padding:0 24px;
 }
@@ -60,7 +80,7 @@ img { max-width:100%; display:block; }
   font-size:15px; font-weight:700;
   color:var(--pink); letter-spacing:2px;
   white-space:nowrap; margin-right:24px;
-  text-shadow: 0 0 14px rgba(201,160,64,0.6), 0 0 28px rgba(201,160,64,0.2);
+  text-shadow: 0 0 14px rgba(0,200,150,0.7), 0 0 28px rgba(0,200,150,0.3);
   text-decoration:none;
 }
 
