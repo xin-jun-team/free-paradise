@@ -76,12 +76,18 @@ img { max-width:100%; display:block; }
 }
 
 .topnav-logo {
+  display:inline-flex; align-items:center; gap:8px;
   font-family: 'Noto Serif TC', serif;
   font-size:15px; font-weight:700;
   color:var(--pink); letter-spacing:2px;
   white-space:nowrap; margin-right:24px;
   text-shadow: 0 0 14px rgba(0,200,150,0.7), 0 0 28px rgba(0,200,150,0.3);
   text-decoration:none;
+}
+.topnav-logo img {
+  height:34px; width:34px; border-radius:50%;
+  object-fit:cover; flex-shrink:0;
+  border:1px solid rgba(0,200,150,.4);
 }
 
 .topnav-sep {
