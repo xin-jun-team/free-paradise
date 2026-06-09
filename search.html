@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>免台幣天堂 - 全站搜尋</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .search-wrap { max-width: 780px; margin: 0 auto; padding: 32px 16px 60px; }
+  .search-title { text-align: center; font-size: 1.5em; color: var(--accent); margin-bottom: 24px; font-weight: bold; }
+  .search-form { display: flex; gap: 8px; margin-bottom: 16px; }
+  .search-input {
+    flex: 1; padding: 12px 16px; font-size: 1em;
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 8px; color: var(--text); outline: none;
+    transition: border-color .2s;
+  }
+  .search-input:focus { border-color: var(--accent); }
+  .search-btn {
+    padding: 12px 22px; background: var(--accent); color: #fff;
+    border: none; border-radius: 8px; font-size: 1em;
+    cursor: pointer; font-weight: bold; white-space: nowrap;
+    transition: opacity .2s;
+  }
+  .search-btn:hover { opacity: .85; }
+
+  /* 快捷標籤 */
+  .chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+  .chip {
+    padding: 5px 14px; border-radius: 20px; font-size: .82em;
+    background: var(--bg2); border: 1px solid var(--border);
+    color: var(--text-muted); cursor: pointer; transition: all .18s;
+  }
+  .chip:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* 結果摘要 */
+  .search-summary { font-size: .88em; color: var(--text-muted); margin-bottom: 16px; min-height: 20px; }
+
+  /* 結果卡片 */
+  .result-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 16px 18px; margin-bottom: 12px;
+    text-decoration: none; display: block;
+    transition: border-color .18s, box-shadow .18s;
+  }
+  .result-card:hover { border-color: var(--accent); box-shadow: 0 0 12px rgba(0,200,150,.15); }
+  .result-title { font-size: 1.05em; font-weight: bold; color: var(--accent); margin-bottom: 4px; }
+  .result-category { font-size: .78em; color: var(--text-muted); margin-bottom: 6px; }
+  .result-snippet { font-size: .88em; color: var(--text-muted); line-height: 1.7; }
+  .result-snippet mark { background: rgba(0,200,150,.25); color: var(--accent); border-radius: 2px; padding: 0 2px; font-style: normal; }
+
+  /* 空狀態 */
+  .search-empty { text-align: center; padding: 48px 0; color: var(--text-muted); font-size: 1em; }
+  .search-empty span { display: block; font-size: 2.5em; margin-bottom: 10px; }
+
+  /* 載入中 */
+  .search-loading { text-align: center; padding: 32px; color: var(--text-muted); }
+</style>
+</head>
+<body>
+
+<!-- ══ 跑馬燈公告 ══ -->
+<div class="ticker-bar">
+  <div class="ticker-inner">
+    <span class="ticker-item">免台幣天堂 現正開放！</span>
+    <span class="ticker-item">0元起玩，手動才是王道</span>
+    <span class="ticker-item">每日推文獎勵，藍鑽給你拿到手軟</span>
+    <span class="ticker-item">新手禮包等你來拿，加入 LINE 即可申請</span>
+    <span class="ticker-item">58等衝等活動獎勵爽爽拿</span>
+    <span class="ticker-item">免台幣天堂 現正開放！</span>
+    <span class="ticker-item">0元起玩，手動才是王道</span>
+    <span class="ticker-item">每日推文獎勵，藍鑽給你拿到手軟</span>
+    <span class="ticker-item">新手禮包等你來拿，加入 LINE 即可申請</span>
+    <span class="ticker-item">58等衝等活動獎勵爽爽拿</span>
+  </div>
+</div>
+
+<!-- ══ 導覽列 ══ -->
+<nav class="topnav" id="topnav">
+  <a class="topnav-logo" href="index.html">⚔️ 免台幣天堂</a>
+  <div class="topnav-sep"></div>
+  <a href="features.html">遊戲特色</a>
+  <a href="vip.html">VIP特權</a>
+  <a href="promote.html">推文/直播</a>
+  <a href="events.html">活動公告</a>
+  <a href="download.html">下載</a>
+  <a href="search.html" class="active">🔍 搜尋</a>
+</nav>
+
+<div class="search-wrap">
+  <div class="search-title">🔍 全站搜尋</div>
+
+  <form class="search-form" id="search-form">
+    <input class="search-input" id="search-input" type="search"
+      placeholder="搜尋頁面、道具、活動、系統…" autocomplete="off">
+    <button class="search-btn" type="submit">搜尋</button>
+  </form>
+
+  <!-- 快捷標籤 -->
+  <div class="chip-row">
+    <button type="button" class="chip" data-q="推文">推文獎勵</button>
+    <button type="button" class="chip" data-q="VIP">VIP特權</button>
+    <button type="button" class="chip" data-q="BOSS">BOSS</button>
+    <button type="button" class="chip" data-q="扭蛋">扭蛋</button>
+    <button type="button" class="chip" data-q="變身">變身</button>
+    <button type="button" class="chip" data-q="娃娃">娃娃</button>
+    <button type="button" class="chip" data-q="聖物">聖物</button>
+    <button type="button" class="chip" data-q="寵物">寵物</button>
+    <button type="button" class="chip" data-q="下載">下載</button>
+    <button type="button" class="chip" data-q="活動">活動</button>
+    <button type="button" class="chip" data-q="武器">武器</button>
+    <button type="button" class="chip" data-q="58等">58等活動</button>
+  </div>
+
+  <div class="search-summary" id="search-summary"></div>
+  <div id="search-results"></div>
+</div>
+
+<script>
+(function() {
+  var records = [];
+  var loaded = false;
+
+  function normalize(s) {
+    return (s || '').toLowerCase().replace(/\s+/g, ' ').trim();
+  }
+
+  function escapeHTML(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function highlight(text, terms) {
+    var escaped = escapeHTML(text);
+    terms.forEach(function(t) {
+      if (!t) return;
+      escaped = escaped.replace(new RegExp('(' + t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + ')', 'gi'),
+        '<mark>$1</mark>');
+    });
+    return escaped;
+  }
+
+  function snippet(content, terms, maxLen) {
+    maxLen = maxLen || 120;
+    var norm = normalize(content);
+    var idx = -1;
+    terms.forEach(function(t) {
+      if (idx === -1 && t) idx = norm.indexOf(t);
+    });
+    if (idx === -1) return content.slice(0, maxLen);
+    var start = Math.max(0, idx - 40);
+    var end = Math.min(content.length, start + maxLen);
+    var s = (start > 0 ? '…' : '') + content.slice(start, end) + (end < content.length ? '…' : '');
+    return s;
+  }
+
+  function score(rec, terms, query) {
+    var title = normalize(rec.title);
+    var desc  = normalize(rec.description);
+    var cont  = normalize(rec.content);
+    var cat   = normalize(rec.category);
+    var all   = title + ' ' + desc + ' ' + cont + ' ' + cat;
+
+    if (!terms.every(function(t){ return all.includes(t); })) return 0;
+
+    var s = 0;
+    terms.forEach(function(t) {
+      if (title.includes(t)) s += 100;
+      if (cat.includes(t))   s += 40;
+      if (desc.includes(t))  s += 35;
+      if (cont.includes(t))  s += 12;
+    });
+    if (title.includes(query)) s += 90;
+    if (desc.includes(query))  s += 28;
+    return s;
+  }
+
+  function doSearch(query) {
+    var q = normalize(query);
+    var resultEl = document.getElementById('search-results');
+    var summaryEl = document.getElementById('search-summary');
+
+    if (!q) {
+      resultEl.innerHTML = '';
+      summaryEl.textContent = '';
+      return;
+    }
+
+    if (!loaded) {
+      resultEl.innerHTML = '<div class="search-loading">索引載入中，請稍候…</div>';
+      return;
+    }
+
+    var terms = q.split(/\s+/).filter(Boolean);
+    var scored = [];
+    records.forEach(function(rec) {
+      var s = score(rec, terms, q);
+      if (s > 0) scored.push({ rec: rec, score: s });
+    });
+    scored.sort(function(a, b) { return b.score - a.score; });
+
+    if (scored.length === 0) {
+      summaryEl.textContent = '找不到「' + query + '」相關結果';
+      resultEl.innerHTML = '<div class="search-empty"><span>🔍</span>找不到符合的頁面，換個關鍵字試試看</div>';
+      return;
+    }
+
+    summaryEl.textContent = '找到 ' + scored.length + ' 個相關結果';
+    var html = '';
+    scored.slice(0, 50).forEach(function(item) {
+      var r = item.rec;
+      var snip = snippet(r.description + ' ' + r.content, terms, 100);
+      html += '<a class="result-card" href="' + r.url + '">'
+        + '<div class="result-title">' + highlight(r.title, terms) + '</div>'
+        + '<div class="result-category">📁 ' + escapeHTML(r.category) + '</div>'
+        + '<div class="result-snippet">' + highlight(snip, terms) + '</div>'
+        + '</a>';
+    });
+    resultEl.innerHTML = html;
+  }
+
+  // 載入索引
+  fetch('data/search-index.json?v=' + Date.now())
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      records = data.records || [];
+      loaded = true;
+      var q = document.getElementById('search-input').value;
+      if (q) doSearch(q);
+    })
+    .catch(function() {
+      document.getElementById('search-results').innerHTML =
+        '<div class="search-empty"><span>⚠️</span>索引載入失敗，請重新整理</div>';
+    });
+
+  // 表單 & 輸入事件
+  var timer;
+  var input = document.getElementById('search-input');
+  input.addEventListener('input', function() {
+    clearTimeout(timer);
+    timer = setTimeout(function() { doSearch(input.value); }, 150);
+  });
+  document.getElementById('search-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    doSearch(input.value);
+  });
+
+  // 快捷標籤
+  document.querySelectorAll('.chip').forEach(function(chip) {
+    chip.addEventListener('click', function() {
+      input.value = chip.dataset.q;
+      doSearch(chip.dataset.q);
+    });
+  });
+
+  // URL query string ?q=
+  var params = new URLSearchParams(window.location.search);
+  var qParam = params.get('q');
+  if (qParam) {
+    input.value = qParam;
+    doSearch(qParam);
+  }
+})();
+</script>
+
+</body>
+</html>
