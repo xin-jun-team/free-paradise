@@ -138,67 +138,156 @@
       <div class="section-line"></div>
     </div>
     <style>
-    .quick-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;margin-top:8px}
-    .quick-card{display:flex;flex-direction:column;align-items:center;justify-content:center;text-decoration:none;border-radius:14px;padding:36px 20px 28px;border:1px solid transparent;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s;text-align:center}
-    .quick-card::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .25s;border-radius:14px}
-    .quick-card:hover{transform:translateY(-6px)}
-    .quick-card:hover::before{opacity:1}
-    .quick-card-icon{font-size:2.6rem;margin-bottom:14px;line-height:1;position:relative;z-index:1;filter:drop-shadow(0 0 8px currentColor)}
-    .quick-card-title{font-size:1.05rem;font-weight:700;letter-spacing:2px;margin-bottom:6px;position:relative;z-index:1}
-    .quick-card-sub{font-size:.75rem;letter-spacing:.5px;opacity:.75;position:relative;z-index:1;line-height:1.6}
-    .quick-card-arrow{position:relative;z-index:1;margin-top:16px;font-size:.78rem;opacity:.6;transition:opacity .2s,transform .2s}
-    .quick-card:hover .quick-card-arrow{opacity:1;transform:translateX(4px)}
+    /* ── 快速入口 v2 · 指揮台風格 ── */
+    .portal-wrap{display:flex;flex-direction:column;gap:12px}
 
-    /* 各卡配色 */
-    .qc-download{background:linear-gradient(135deg,#0d1f3c,#0a1628);border-color:rgba(0,180,255,.3);color:#7dd4fc}
-    .qc-download::before{background:linear-gradient(135deg,rgba(0,180,255,.12),rgba(0,100,200,.08));border:1px solid rgba(0,180,255,.5)}
-    .qc-download:hover{box-shadow:0 8px 32px rgba(0,150,255,.25)}
+    /* 頂部橫幅下載卡 */
+    .portal-banner{display:flex;align-items:center;gap:20px;padding:20px 28px;border-radius:14px;text-decoration:none;position:relative;overflow:hidden;background:linear-gradient(120deg,#071528 0%,#0d1f3c 60%,#091830 100%);border:1px solid rgba(0,180,255,.22);transition:box-shadow .25s,transform .2s}
+    .portal-banner:hover{box-shadow:0 6px 32px rgba(0,150,255,.28);transform:translateX(3px)}
+    .portal-banner::after{content:'';position:absolute;right:-60px;top:-40px;width:200px;height:200px;background:radial-gradient(circle,rgba(0,180,255,.08) 0%,transparent 70%);pointer-events:none}
+    .pb-icon-wrap{width:54px;height:54px;border-radius:12px;background:rgba(0,180,255,.1);border:1px solid rgba(0,180,255,.28);display:flex;align-items:center;justify-content:center;font-size:1.75rem;flex-shrink:0;filter:drop-shadow(0 0 12px rgba(0,180,255,.35))}
+    .pb-texts{flex:1;min-width:0}
+    .pb-label{display:inline-block;background:rgba(0,180,255,.14);color:#60c8f8;font-size:.6rem;font-weight:800;letter-spacing:2px;padding:2px 8px;border-radius:4px;border:1px solid rgba(0,180,255,.28);margin-bottom:6px}
+    .pb-title{font-size:1.05rem;font-weight:700;letter-spacing:1.5px;color:#b3e5fc;margin-bottom:3px}
+    .pb-sub{font-size:.73rem;color:rgba(125,212,252,.65);letter-spacing:.3px}
+    .pb-cta{background:rgba(0,180,255,.14);border:1px solid rgba(0,180,255,.36);color:#7dd4fc;padding:10px 24px;border-radius:8px;font-size:.8rem;font-weight:700;letter-spacing:1px;white-space:nowrap;transition:background .2s,box-shadow .2s;flex-shrink:0}
+    .portal-banner:hover .pb-cta{background:rgba(0,180,255,.26);box-shadow:0 0 18px rgba(0,180,255,.22)}
 
-    .qc-features{background:linear-gradient(135deg,#0e1a0d,#0a1408);border-color:rgba(0,220,150,.25);color:#6ee7b7}
-    .qc-features::before{background:linear-gradient(135deg,rgba(0,220,150,.1),rgba(0,160,100,.06));border:1px solid rgba(0,220,150,.45)}
-    .qc-features:hover{box-shadow:0 8px 32px rgba(0,200,130,.2)}
+    /* 三欄卡 */
+    .portal-row3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .p3-card{display:flex;flex-direction:column;text-decoration:none;border-radius:12px;padding:20px 18px 16px;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s;border-left:3px solid transparent}
+    .p3-card:hover{transform:translateY(-5px)}
+    .p3-card::before{content:'';position:absolute;inset:0;pointer-events:none}
+    .p3-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px}
+    .p3-icon{font-size:1.8rem;line-height:1;filter:drop-shadow(0 0 8px currentColor)}
+    .p3-badge{font-size:.58rem;font-weight:800;letter-spacing:1.5px;padding:2px 7px;border-radius:4px}
+    .p3-name{font-size:.9rem;font-weight:700;letter-spacing:2px;margin-bottom:5px}
+    .p3-desc{font-size:.7rem;opacity:.68;line-height:1.7;letter-spacing:.2px}
+    .p3-go{margin-top:14px;font-size:.7rem;opacity:.5;transition:opacity .2s,transform .2s;letter-spacing:.5px}
+    .p3-card:hover .p3-go{opacity:.9;transform:translateX(5px)}
 
-    .qc-referral{background:linear-gradient(135deg,#1a0d1e,#120a18);border-color:rgba(180,100,255,.3);color:#d8b4fe}
-    .qc-referral::before{background:linear-gradient(135deg,rgba(180,100,255,.12),rgba(120,60,200,.08));border:1px solid rgba(180,100,255,.5)}
-    .qc-referral:hover{box-shadow:0 8px 32px rgba(160,80,255,.25)}
+    .p3-ev{background:linear-gradient(135deg,#1a0e00,#110900);border-left-color:#e07020;color:#ffa060}
+    .p3-ev::before{background:linear-gradient(135deg,rgba(255,110,30,.06),transparent 65%)}
+    .p3-ev:hover{box-shadow:0 8px 24px rgba(255,100,0,.18)}
+    .badge-ev{background:rgba(255,100,20,.14);color:#ff9040;border:1px solid rgba(255,100,20,.32)}
 
-    .qc-hot{background:linear-gradient(135deg,#1e0800,#160500);border-color:rgba(255,100,30,.35);color:#ffa060;position:relative}
-    .qc-hot::before{background:linear-gradient(135deg,rgba(255,100,30,.14),rgba(200,60,0,.08));border:1px solid rgba(255,120,40,.55)}
-    .qc-hot:hover{box-shadow:0 8px 32px rgba(255,80,0,.3)}
-    .qc-hot-badge{position:absolute;top:12px;right:12px;background:linear-gradient(135deg,#ff4500,#ff8c00);color:#fff;font-size:.62em;font-weight:900;padding:2px 7px;border-radius:10px;letter-spacing:1px;animation:hotPulse 1.5s ease-in-out infinite;z-index:2}
+    .p3-ft{background:linear-gradient(135deg,#081208,#060e06);border-left-color:#00c896;color:#6ee7b7}
+    .p3-ft::before{background:linear-gradient(135deg,rgba(0,200,150,.06),transparent 65%)}
+    .p3-ft:hover{box-shadow:0 8px 24px rgba(0,200,130,.18)}
+    .badge-ft{background:rgba(0,200,150,.1);color:#00c896;border:1px solid rgba(0,200,150,.28)}
 
-    .qc-line{background:linear-gradient(135deg,#001a00,#002800);border-color:rgba(0,195,0,.3);color:#4ade80}
-    .qc-line::before{background:linear-gradient(135deg,rgba(0,195,0,.12),rgba(0,140,0,.06));border:1px solid rgba(0,195,0,.5)}
-    .qc-line:hover{box-shadow:0 8px 32px rgba(0,195,0,.25)}
-    .qc-line-id{font-size:.72rem;letter-spacing:.5px;opacity:.65;position:relative;z-index:1;margin-top:4px}
+    .p3-vip{background:linear-gradient(135deg,#150f04,#0f0b02);border-left-color:#d4af37;color:#f2d06b}
+    .p3-vip::before{background:linear-gradient(135deg,rgba(212,175,55,.06),transparent 65%)}
+    .p3-vip:hover{box-shadow:0 8px 24px rgba(212,175,55,.18)}
+    .badge-vip{background:rgba(212,175,55,.1);color:#d4af37;border:1px solid rgba(212,175,55,.28)}
+
+    /* 四欄小卡 */
+    .portal-row4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+    .p4-card{display:flex;align-items:center;gap:14px;text-decoration:none;border-radius:10px;padding:14px 16px;border:1px solid transparent;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s,border-color .2s}
+    .p4-card:hover{transform:translateY(-3px)}
+    .p4-ico{font-size:1.45rem;line-height:1;flex-shrink:0}
+    .p4-texts{}
+    .p4-name{font-size:.78rem;font-weight:700;letter-spacing:1.5px;margin-bottom:2px}
+    .p4-hint{font-size:.62rem;opacity:.58;letter-spacing:.2px}
+
+    .p4-boss{background:#0e0808;border-color:rgba(220,50,50,.18);color:#f87171}
+    .p4-boss:hover{box-shadow:0 5px 16px rgba(220,50,50,.18);border-color:rgba(220,50,50,.38)}
+    .p4-map{background:#080e0a;border-color:rgba(0,180,120,.18);color:#6ee7b7}
+    .p4-map:hover{box-shadow:0 5px 16px rgba(0,180,120,.18);border-color:rgba(0,180,120,.38)}
+    .p4-rate{background:#09080e;border-color:rgba(130,110,240,.18);color:#c4b5fd}
+    .p4-rate:hover{box-shadow:0 5px 16px rgba(130,110,240,.18);border-color:rgba(130,110,240,.38)}
+    .p4-promote{background:#0a080e;border-color:rgba(190,100,255,.18);color:#d8b4fe}
+    .p4-promote:hover{box-shadow:0 5px 16px rgba(190,100,255,.18);border-color:rgba(190,100,255,.38)}
+
+    /* RWD */
+    @media(max-width:720px){
+      .portal-row3{grid-template-columns:1fr 1fr}
+      .portal-row4{grid-template-columns:1fr 1fr}
+      .pb-cta{display:none}
+    }
+    @media(max-width:440px){
+      .portal-banner{padding:16px 18px;gap:14px}
+      .pb-icon-wrap{width:44px;height:44px;font-size:1.4rem}
+      .portal-row3{grid-template-columns:1fr}
+    }
     </style>
 
-    <div class="quick-grid">
-      <a href="download.html" class="quick-card qc-download">
-        <div class="quick-card-icon">⬇️</div>
-        <div class="quick-card-title">立即下載</div>
-        <div class="quick-card-sub">取得最新客戶端<br>馬上加入冒險</div>
-        <div class="quick-card-arrow">前往下載 →</div>
+    <div class="portal-wrap">
+
+      <!-- ① 橫幅：立即下載 -->
+      <a href="download.html" class="portal-banner">
+        <div class="pb-icon-wrap">⬇️</div>
+        <div class="pb-texts">
+          <div class="pb-label">DOWNLOAD</div>
+          <div class="pb-title">立即下載 免台幣天堂客戶端</div>
+          <div class="pb-sub">v381 最新版本 · 完全免費 · 解壓即玩，零門檻開始冒險</div>
+        </div>
+        <div class="pb-cta">立即下載 →</div>
       </a>
-      <a href="features.html" class="quick-card qc-features">
-        <div class="quick-card-icon">⚔️</div>
-        <div class="quick-card-title">遊戲特色</div>
-        <div class="quick-card-sub">職業技能・特色系統<br>專屬天堂玩法</div>
-        <div class="quick-card-arrow">探索特色 →</div>
-      </a>
-      <a href="promote.html" class="quick-card qc-referral">
-        <div class="quick-card-icon">📣</div>
-        <div class="quick-card-title">推文系統</div>
-        <div class="quick-card-sub">邀請好友一起冒險<br>雙方皆享豐厚獎勵</div>
-        <div class="quick-card-arrow">立即推文 →</div>
-      </a>
-      <a href="https://lin.ee/994n1fz" target="_blank" class="quick-card qc-line">
-        <div class="quick-card-icon"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/4/41/LINE_logo.svg" alt="LINE" style="width:2.6rem;height:2.6rem;filter:drop-shadow(0 0 8px rgba(0,195,0,.6))"></div>
-        <div class="quick-card-title">聯絡官方</div>
-        <div class="quick-card-sub">加入官方 LINE<br>客服即時回覆</div>
-        <div class="qc-line-id">ID：@492qdfga</div>
-        <div class="quick-card-arrow">加入 LINE →</div>
-      </a>
+
+      <!-- ② 三欄：活動 / 遊戲特色 / VIP等級 -->
+      <div class="portal-row3">
+        <a href="events-list.html" class="p3-card p3-ev">
+          <div class="p3-top">
+            <div class="p3-icon">🎉</div>
+            <span class="p3-badge badge-ev">活動</span>
+          </div>
+          <div class="p3-name">最新活動</div>
+          <div class="p3-desc">限時活動、衝等獎勵<br>推文藍鑽、節慶禮包</div>
+          <div class="p3-go">查看活動 →</div>
+        </a>
+        <a href="features.html" class="p3-card p3-ft">
+          <div class="p3-top">
+            <div class="p3-icon">⚔️</div>
+            <span class="p3-badge badge-ft">特色</span>
+          </div>
+          <div class="p3-name">遊戲特色</div>
+          <div class="p3-desc">娃娃・威望・主線勳章<br>職業強化・天堂獨特玩法</div>
+          <div class="p3-go">探索特色 →</div>
+        </a>
+        <a href="feature-vip.html" class="p3-card p3-vip">
+          <div class="p3-top">
+            <div class="p3-icon">👑</div>
+            <span class="p3-badge badge-vip">VIP</span>
+          </div>
+          <div class="p3-name">尊榮VIP等級</div>
+          <div class="p3-desc">VIP1～VIP15 完整階級<br>累積紅利享能力加成</div>
+          <div class="p3-go">查看VIP →</div>
+        </a>
+      </div>
+
+      <!-- ③ 四欄小卡：BOSS / 地圖 / 倍率 / 推文 -->
+      <div class="portal-row4">
+        <a href="boss.html" class="p4-card p4-boss">
+          <div class="p4-ico">👾</div>
+          <div class="p4-texts">
+            <div class="p4-name">BOSS介紹</div>
+            <div class="p4-hint">出沒地點 · 掉寶</div>
+          </div>
+        </a>
+        <a href="maps.html" class="p4-card p4-map">
+          <div class="p4-ico">🗺️</div>
+          <div class="p4-texts">
+            <div class="p4-name">地圖掉落</div>
+            <div class="p4-hint">特殊地圖 · 寶箱</div>
+          </div>
+        </a>
+        <a href="rates.html" class="p4-card p4-rate">
+          <div class="p4-ico">📊</div>
+          <div class="p4-texts">
+            <div class="p4-name">版本倍率</div>
+            <div class="p4-hint">經驗 · 金幣 · 掉寶</div>
+          </div>
+        </a>
+        <a href="promote.html" class="p4-card p4-promote">
+          <div class="p4-ico">📣</div>
+          <div class="p4-texts">
+            <div class="p4-name">推文系統</div>
+            <div class="p4-hint">推文 · 直播獎勵</div>
+          </div>
+        </a>
+      </div>
+
     </div>
   </div>
 </section>
