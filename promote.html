@@ -59,23 +59,87 @@
     <button class="page-tab" onclick="switchTab('live')">🎬 直播說明</button>
   </div>
 
+  <!-- ══ 服務總覽 ══ -->
+  <div style="margin-bottom:36px">
+    <!-- 雙欄卡片 -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+
+      <!-- 左：推文代工 -->
+      <div style="background:linear-gradient(160deg,#061310,#0d1e18,#061310);border:1px solid rgba(0,200,150,.35);border-radius:14px;overflow:hidden;position:relative;display:flex;flex-direction:column">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#00c896,#4dffd0,#00c896,transparent)"></div>
+        <div style="background:linear-gradient(135deg,rgba(0,200,150,.12),transparent);padding:20px 20px 16px;border-bottom:1px solid rgba(0,200,150,.15);text-align:center">
+          <div style="display:inline-flex;align-items:center;gap:6px;background:linear-gradient(90deg,#004030,#008f6a);color:#4dffd0;font-size:.7em;font-weight:800;letter-spacing:2px;padding:4px 14px;border-radius:20px;margin-bottom:12px">✨ 包月推文代工 ✨</div>
+          <div style="display:flex;justify-content:center;align-items:stretch;gap:0">
+            <div style="flex:1;text-align:center;padding:8px 12px;border-right:1px solid rgba(0,200,150,.15)">
+              <div style="color:#3a7a6a;font-size:.68em;letter-spacing:1px;margin-bottom:4px">包月</div>
+              <div style="color:#00c896;font-size:2em;font-weight:900;line-height:1;text-shadow:0 0 10px rgba(0,200,150,.25)">$400</div>
+              <div style="color:#2a6050;font-size:.72em;margin-top:4px">10 推 / 月</div>
+              <div style="margin-top:6px;display:inline-block;background:#001a12;border:1px solid rgba(0,200,150,.35);color:#00c896;font-size:.68em;font-weight:700;padding:2px 8px;border-radius:4px">限定 3 隻帳號 / 人</div>
+            </div>
+            <div style="flex:1;text-align:center;padding:8px 12px">
+              <div style="color:#3a7a6a;font-size:.68em;letter-spacing:1px;margin-bottom:4px">包季</div>
+              <div style="color:#00c896;font-size:2em;font-weight:900;line-height:1;text-shadow:0 0 10px rgba(0,200,150,.25)">$999</div>
+              <div style="color:#2a6050;font-size:.72em;margin-top:4px">3 隻帳號方案</div>
+            </div>
+          </div>
+        </div>
+        <div style="padding:16px 20px;flex:1;display:flex;flex-direction:column;gap:9px">
+          <div style="display:flex;align-items:center;gap:10px;background:rgba(0,200,150,.06);border:1px solid rgba(0,200,150,.12);border-radius:7px;padding:9px 12px">
+            <span style="font-size:1.1em">🤖</span>
+            <div><div style="color:#80ffe0;font-size:.83em;font-weight:600;line-height:1.2">團隊親自操盤</div><div style="color:#2a6050;font-size:.72em;margin-top:2px">無需自行回報，全程代辦</div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;background:rgba(0,200,150,.06);border:1px solid rgba(0,200,150,.12);border-radius:7px;padding:9px 12px">
+            <span style="font-size:1.1em">💎</span>
+            <div><div style="color:#80ffe0;font-size:.83em;font-weight:600;line-height:1.2">獎勵直接入庫</div><div style="color:#2a6050;font-size:.72em;margin-top:2px">省去每日煩惱不漏發</div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;background:rgba(0,200,150,.06);border:1px solid rgba(0,200,150,.12);border-radius:7px;padding:9px 12px">
+            <span style="font-size:1.1em">📢</span>
+            <div><div style="color:#80ffe0;font-size:.83em;font-weight:600;line-height:1.2">10 推文 / 月保障</div><div style="color:#2a6050;font-size:.72em;margin-top:2px">每月固定推廣次數</div></div>
+          </div>
+        </div>
+        <div style="padding:0 20px 20px">
+          <a href="https://lin.ee/994n1fz" target="_blank" style="display:block;background:linear-gradient(90deg,#005a40,#00c896);color:#001a10;font-weight:800;font-size:.88em;padding:11px 20px;border-radius:8px;text-decoration:none;letter-spacing:.5px;text-align:center;box-shadow:0 3px 12px rgba(0,200,150,.2)">💬 私訊 LINE 客服申請</a>
+        </div>
+      </div>
+
+      <!-- 右：直播代管 -->
+      <div style="background:linear-gradient(160deg,#100d06,#1c1608,#100d06);border:1px solid rgba(201,160,64,.4);border-radius:14px;overflow:hidden;position:relative;display:flex;flex-direction:column">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#c9a040,#f2d06b,#c9a040,transparent)"></div>
+        <div style="background:linear-gradient(135deg,rgba(201,160,64,.12),transparent);padding:20px 20px 16px;border-bottom:1px solid rgba(201,160,64,.15);text-align:center">
+          <div style="display:inline-flex;align-items:center;gap:6px;background:linear-gradient(90deg,#7a5a10,#c9a040);color:#fff;font-size:.7em;font-weight:800;letter-spacing:2px;padding:4px 14px;border-radius:20px;margin-bottom:12px">🎬 包月直播代管 🎬</div>
+          <div style="margin-bottom:4px">
+            <span style="color:#f2d06b;font-size:2.4em;font-weight:900;line-height:1;text-shadow:0 0 14px rgba(242,208,107,.3)">$3,000</span>
+            <span style="color:#a88840;font-size:.95em;font-weight:700;margin-left:6px">/ 角色</span>
+          </div>
+          <div style="margin-top:8px">
+            <span style="background:#2a1e06;border:1px solid rgba(201,160,64,.4);color:#c9a040;font-size:.72em;font-weight:700;padding:3px 12px;border-radius:20px">每人限定 2 隻</span>
+          </div>
+        </div>
+        <div style="padding:16px 20px;flex:1;display:flex;flex-direction:column;gap:9px">
+          <div style="display:flex;align-items:center;gap:10px;background:rgba(201,160,64,.07);border:1px solid rgba(201,160,64,.18);border-radius:7px;padding:9px 12px">
+            <span style="font-size:1.1em">📅</span>
+            <div><div style="color:#e8d080;font-size:.83em;font-weight:600;line-height:1.2">按日發放獎勵</div><div style="color:#7a6a40;font-size:.72em;margin-top:2px">每日入帳不漏發</div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;background:rgba(201,160,64,.05);border:1px solid rgba(201,160,64,.12);border-radius:7px;padding:9px 12px">
+            <span style="font-size:1.1em">😴</span>
+            <div><div style="color:#c9b880;font-size:.83em;font-weight:600;line-height:1.2">躺著領不費力</div><div style="color:#6a5a38;font-size:.72em;margin-top:2px">不需自己開台直播</div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;background:rgba(201,160,64,.05);border:1px solid rgba(201,160,64,.12);border-radius:7px;padding:9px 12px">
+            <span style="font-size:1.1em">💎</span>
+            <div><div style="color:#c9b880;font-size:.83em;font-weight:600;line-height:1.2">獎勵直接入庫</div><div style="color:#6a5a38;font-size:.72em;margin-top:2px">省去每日直播煩惱</div></div>
+          </div>
+        </div>
+        <div style="padding:0 20px 20px">
+          <a href="https://lin.ee/994n1fz" target="_blank" style="display:block;background:linear-gradient(90deg,#7a5a10,#c9a040);color:#0d0a04;font-weight:800;font-size:.88em;padding:11px 20px;border-radius:8px;text-decoration:none;letter-spacing:.5px;text-align:center;box-shadow:0 3px 12px rgba(201,160,64,.25)">💬 私訊 LINE 客服申請</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- ══ /服務總覽 ══ -->
+
   <!-- ══ TAB 1: 推文說明 ══ -->
   <div id="tab-tweet" class="tab-content active">
-
-    <!-- 包月代工橫幅 -->
-    <div style="background:linear-gradient(135deg,#3a1500,#1a0800);border-radius:10px;padding:22px;text-align:center;border:2px solid rgba(249,168,37,.4);margin-bottom:24px;box-shadow:0 4px 20px rgba(249,168,37,.15)">
-      <strong style="color:#ffb74d;font-size:1.5em;display:block;margin-bottom:8px;text-shadow:0 1px 4px rgba(0,0,0,.5)">✨ 官方提供：包月推文代工服務 ✨</strong>
-      <div style="color:var(--text);font-size:1.15em;font-weight:bold;display:flex;justify-content:center;gap:32px;flex-wrap:wrap;margin-top:4px">
-        <span>包月 <span style="color:#ef5350;font-size:1.3em;text-decoration:underline">$400</span>・10推/月</span>
-        <span>包季 / 三組帳號 <span style="color:#ef5350;font-size:1.3em;text-decoration:underline">$999</span></span>
-      </div>
-      <p style="margin:10px 0 0 0;color:var(--text-muted);font-weight:bold;font-size:.93em">
-        團隊親自操盤，省去每日回報煩惱，獎勵直接入庫！(詳情請私訊客服)
-      </p>
-      <div style="margin-top:10px;display:inline-block;background:rgba(239,83,80,.15);border:1px solid rgba(239,83,80,.4);border-radius:20px;padding:4px 16px;font-size:.85em;color:#ef9a9a;font-weight:bold">
-        ⚠️ 每人限包三隻帳號
-      </div>
-    </div>
 
     <!-- 宣傳用途公告 -->
     <div style="background:linear-gradient(135deg,rgba(0,200,150,.18),rgba(0,150,100,.12));border:2px solid #00c896;border-radius:10px;padding:14px 20px;margin-bottom:18px;text-align:center;box-shadow:0 0 18px rgba(0,200,150,.25)">
@@ -129,7 +193,7 @@
     <div style="background:rgba(239,83,80,.1);border:2px solid rgba(239,83,80,.5);border-radius:10px;padding:18px 20px;margin-bottom:24px">
       <strong style="color:#ef5350;font-size:1em;display:flex;align-items:center;gap:8px">⚠️ 限量推文 · 特別規定</strong>
       <ul class="promo-ul" style="margin-top:10px">
-        <li><strong style="color:var(--text)">帳號上限：</strong>每位玩家最多以 <span style="color:#ef5350;font-weight:bold">2 組帳號</span> 領取推文獎勵，超出部分一律不予發放。</li>
+        <li><strong style="color:var(--text)">帳號上限：</strong>每位玩家最多以 <span style="color:#ef5350;font-weight:bold">3 組帳號</span> 領取推文獎勵，超出部分一律不予發放。</li>
         <li><strong style="color:var(--text)">嚴禁洗取物資：</strong>利用多帳號重複領取獎勵者，視同違規，一律依規懲處。</li>
         <li><strong style="color:var(--text)">禁止借帳測試：</strong>推文期間無需借用他人手機或帳號進行測試，一旦查獲即執行懲處，不另行通知。</li>
       </ul>
@@ -257,30 +321,6 @@
 
   <!-- ══ TAB 2: 直播說明 ══ -->
   <div id="tab-live" class="tab-content">
-
-    <!-- 包月直播橫幅 -->
-    <div style="position:relative;background:linear-gradient(135deg,#100d06,#1c1608,#100d06);border-radius:12px;padding:26px 24px 22px;text-align:center;border:1px solid rgba(201,160,64,.45);margin-bottom:28px;box-shadow:0 0 28px rgba(201,160,64,.08),0 4px 20px rgba(0,0,0,.6);overflow:hidden">
-      <div style="position:absolute;top:-30px;left:50%;transform:translateX(-50%);width:320px;height:100px;background:radial-gradient(ellipse,rgba(201,160,64,.12),transparent 70%);pointer-events:none"></div>
-      <div style="display:inline-flex;align-items:center;gap:6px;background:linear-gradient(90deg,#7a5a10,#c9a040);color:#fff;font-size:.78em;font-weight:800;letter-spacing:2px;padding:4px 16px;border-radius:20px;margin-bottom:14px;box-shadow:0 2px 10px rgba(201,160,64,.3)">
-        🎬 官方包月直播服務 🎬
-      </div>
-      <div style="color:#f2d06b;font-size:1.65em;font-weight:900;letter-spacing:1px;text-shadow:0 2px 8px rgba(0,0,0,.8);margin-bottom:10px">
-        包月直播代管
-      </div>
-      <div style="display:inline-flex;align-items:baseline;gap:8px;margin-bottom:16px">
-        <span style="color:#f2d06b;font-size:2.8em;font-weight:900;line-height:1;text-shadow:0 0 12px rgba(242,208,107,.35)">$3,000</span>
-        <span style="color:#a88840;font-size:1.05em;font-weight:700">/ 角色</span>
-        <span style="background:#2a1e06;border:1px solid rgba(201,160,64,.4);color:#c9a040;font-size:.72em;font-weight:700;padding:2px 9px;border-radius:4px;margin-left:4px">每人限定 2 隻</span>
-      </div>
-      <div style="display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:16px">
-        <span style="background:#1c1608;border:1px solid rgba(201,160,64,.5);color:#c9a040;font-size:.85em;font-weight:700;padding:5px 13px;border-radius:6px">📅 按日發放獎勵</span>
-        <span style="background:#1c1608;border:1px solid rgba(201,160,64,.25);color:#9a8f85;font-size:.85em;font-weight:700;padding:5px 13px;border-radius:6px">🤖 團隊代為操盤</span>
-        <span style="background:#1c1608;border:1px solid rgba(201,160,64,.25);color:#9a8f85;font-size:.85em;font-weight:700;padding:5px 13px;border-radius:6px">💎 獎勵直接入庫</span>
-        <span style="background:#1c1608;border:1px solid rgba(201,160,64,.25);color:#9a8f85;font-size:.85em;font-weight:700;padding:5px 13px;border-radius:6px">😴 躺著領不費力</span>
-      </div>
-      <p style="margin:0 0 18px 0;color:#7a6a50;font-size:.9em">不需自己開台，省去每日直播煩惱，獎勵按日入帳不漏發</p>
-      <a href="https://lin.ee/994n1fz" target="_blank" style="display:inline-block;background:linear-gradient(90deg,#7a5a10,#c9a040);color:#0d0a04;font-weight:800;font-size:.95em;padding:10px 30px;border-radius:6px;text-decoration:none;box-shadow:0 3px 12px rgba(201,160,64,.3);letter-spacing:.5px">💬 私訊 LINE 客服申請</a>
-    </div>
 
     <!-- 行為規範 -->
     <div style="background:rgba(249,168,37,.07);border:1px solid rgba(249,168,37,.25);border-radius:8px;padding:18px;margin-bottom:20px">
